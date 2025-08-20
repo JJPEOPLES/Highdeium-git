@@ -86,9 +86,9 @@ export function Navigation() {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="relative h-8 w-8 rounded-full" data-testid="user-menu">
                     <Avatar className="h-8 w-8">
-                      <AvatarImage src={user.profileImageUrl || ''} alt={user.firstName || 'User'} />
+                      <AvatarImage src={(user as any)?.profileImageUrl || ''} alt={(user as any)?.firstName || 'User'} />
                       <AvatarFallback>
-                        {user.firstName?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || 'U'}
+                        {(user as any)?.firstName?.[0]?.toUpperCase() || (user as any)?.email?.[0]?.toUpperCase() || 'U'}
                       </AvatarFallback>
                     </Avatar>
                   </Button>
@@ -96,13 +96,13 @@ export function Navigation() {
                 <DropdownMenuContent className="w-56" align="end" forceMount>
                   <div className="flex flex-col space-y-1 p-2">
                     <p className="text-sm font-medium leading-none" data-testid="user-name">
-                      {user.firstName && user.lastName 
-                        ? `${user.firstName} ${user.lastName}`
-                        : user.email
+                      {(user as any)?.firstName && (user as any)?.lastName 
+                        ? `${(user as any).firstName} ${(user as any).lastName}`
+                        : (user as any)?.email
                       }
                     </p>
                     <p className="text-xs leading-none text-muted-foreground" data-testid="user-email">
-                      {user.email}
+                      {(user as any)?.email}
                     </p>
                   </div>
                   <DropdownMenuSeparator />

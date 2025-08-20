@@ -354,7 +354,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Book not found" });
       }
 
-      const amount = parseFloat(book.price) * 100; // Convert to cents
+      if (!stripe) {
+        return res.status(400).json({ message: "Payment processing not configured" });
+      }
+
+      const amount = parseFloat(book.price || '0') * 100; // Convert to cents
 
       const paymentIntent = await stripe.paymentIntents.create({
         amount: Math.round(amount),
@@ -362,7 +366,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         payment_method_types: ['card', 'cashapp'],
         metadata: {
           bookId,
-          userId: req.user.claims.sub,
+          userId: (req.user as any)?.claims?.sub || 'unknown',
         },
       });
 
@@ -376,7 +380,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post('/api/purchase-book', isAuthenticated, async (req: any, res) => {
     try {
       const { bookId, paymentIntentId } = req.body;
-      const userId = req.user.claims.sub;
+      const userId = (req.user as any)?.claims?.sub;
 
       const book = await storage.getBook(bookId);
       if (!book) {
@@ -389,7 +393,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Book already purchased" });
       }
 
-      const purchase = await storage.createPurchase(userId, bookId, book.price, paymentIntentId);
+      const purchase = await storage.createPurchase(userId, bookId, book.price || '0', paymentIntentId);
       res.status(201).json(purchase);
     } catch (error) {
       console.error("Error creating purchase:", error);
