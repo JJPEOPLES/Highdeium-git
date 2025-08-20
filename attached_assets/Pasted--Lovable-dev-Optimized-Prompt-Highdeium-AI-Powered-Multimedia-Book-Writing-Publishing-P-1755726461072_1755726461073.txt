@@ -1,0 +1,163 @@
+---
+**[Lovable.dev Optimized Prompt] – Highdeium: AI-Powered Multimedia Book Writing & Publishing Platform**
+
+### **1. Project Overview**
+**Project Name:** Highdeium
+**Tagline:** *"Unleash Your Story – Any Genre, Any Format, Any Audience."*
+**Description:**
+Highdeium is a **next-generation book writing and publishing platform** that allows users to create, share, and monetize **multimedia-rich books** (text, images, videos, music, and covers in **up to 4K resolution**). The platform features:
+- **AI-Powered Content Moderation:** An algorithm automatically detects appropriateness. If marked **18+**, content is redirected to a separate **"Mature Content" channel**.
+- **Genre-Agnostic Publishing:** Supports **all genres** (fantasy, sci-fi, romance, horror, non-fiction, etc.).
+- **Social Feed:** Users can follow creators, discover trending books, and engage via likes/comments.
+- **Monetization:** Integrated **Stripe** for subscriptions, tips, or paywalled content.
+- **Collaboration:** **GitHub** integration for version control (optional for co-authoring).
+- **Backend:** **Supabase** for scalable databases, auth, and storage.
+
+**Target Audience:**
+- **Primary:** Aspiring & established **writers, authors, and content creators** (ages 13+).
+- **Secondary:** Readers, artists, musicians, and indie publishers.
+- **Tertiary:** Book clubs, educators, and collaborative writing groups.
+
+**Unique Selling Points (USPs):**
+✅ **Multimedia Books** – Embed videos (trailers, readings), music (soundtracks), and high-res images.
+✅ **Smart Moderation** – AI flags NSFW content; users self-classify as **18+** for mature channels.
+✅ **Discoverability** – Algorithm-driven **feed** with trending, recommended, and genre-specific sections.
+✅ **Monetization Ready** – Stripe for payments, Supabase for secure data.
+
+---
+
+### **2. Core Features & Functionality**
+#### **A. User Roles & Permissions**
+| Role          | Permissions                                                                 |
+|---------------|-----------------------------------------------------------------------------|
+| **Guest**     | Browse public books, view feeds, limited previews.                         |
+| **Reader**    | Follow authors, like/comment, save books, access free content.             |
+| **Creator**   | Publish books, upload multimedia, set monetization, manage drafts.        |
+| **Admin**     | Moderate content, manage reports, adjust AI filters, access analytics.     |
+
+#### **B. Key Features Breakdown**
+| Feature                | Description                                                                                                                                                                                                 |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Multimedia Book Editor** | WYSIWYG editor with **rich text, image (PNG/JPG/WEBp up to 4K), video (MP4/WEBm), audio (MP3/WAV), and cover art** support. Drag-and-drop interface.                                      |
+| **AI Moderation System** | Automated **NSFW detection** (text/image/video). Users **self-classify** as 18+ to post in mature channels. Admin can override.                                                              |
+| **Dual-Channel Publishing** | **Main Feed** (SFW) and **Mature Feed** (18+). Users toggle visibility in settings.                                                                                                                          |
+| **Social Feed & Discovery** | **Algorithm-driven feed** showing trending, new, and followed creators. Filters by **genre, media type, and popularity**.                                                                   |
+| **Monetization** | **Stripe integration** for: <br> - One-time purchases (books/chapters) <br> - Subscriptions (exclusive content) <br> - Tips/donations <br> - Ad-free reading (premium tier). |
+| **Collaboration Tools** | **GitHub sync** for co-authoring (optional). Version history, real-time comments, and role assignments (editor, illustrator, etc.).                                                        |
+| **Analytics Dashboard** | Creators track **views, engagement, earnings, and audience demographics**.                                                                                                                                 |
+| **Reader Engagement** | Likes, comments, bookmarks, and **reading lists**. Optional **community challenges** (e.g., "30-Day Writing Sprint").                                                                     |
+| **Responsive Design** | Fully optimized for **desktop, tablet, and mobile** (iOS/Android).                                                                                                                                          |
+
+#### **C. Content Types Supported**
+| Type          | Formats               | Max Resolution/Size       |
+|---------------|-----------------------|----------------------------|
+| **Text**      | MD, TXT, DOCX         | Unlimited (reasonable)     |
+| **Images**    | PNG, JPG, WEBP, SVG   | 4K (3840×2160)             |
+| **Videos**    | MP4, WEBM             | 4K, max 10GB               |
+| **Audio**     | MP3, WAV, FLAC        | 320kbps, max 500MB         |
+| **Covers**    | PNG, JPG, WEBP        | 4K, optimized for thumbnails |
+
+---
+
+### **3. Technical Specifications**
+#### **A. Integrations**
+| Service       | Purpose                                                                 |
+|---------------|-------------------------------------------------------------------------|
+| **Stripe**    | Payments (subscriptions, tips, purchases).                             |
+| **Supabase**  | Auth, databases, storage (for media), real-time updates.               |
+| **GitHub**    | Version control for collaborative writing (optional).                 |
+| **Cloudinary**| (Optional) Image/video optimization & CDN.                             |
+
+#### **B. Database Schema (Key Tables)**
+| Table          | Fields (Example)                                                                 |
+|----------------|-------------------------------------------------------------------------------|
+| **Users**      | `id, username, email, role, bio, profile_pic, stripe_customer_id`          |
+| **Books**      | `id, title, author_id, genre, description, cover_image, is_mature, price`  |
+| **Chapters**   | `id, book_id, title, content (rich text), media_attachments, order`         |
+| **Media**      | `id, url, type (image/video/audio), resolution, size, alt_text`            |
+| **Transactions** | `id, user_id, book_id, amount, type (purchase/tip/subscription), date`   |
+| **Engagement** | `id, user_id, book_id, type (like/comment/bookmark), content, timestamp`   |
+
+#### **C. Security & Compliance**
+- **Age Verification:** Self-declaration for 18+ content (legal disclaimer).
+- **Copyright Protection:** DMCA takedown process; watermarks for premium content.
+- **Data Privacy:** GDPR/CCPA compliant; Supabase’s built-in security.
+
+---
+
+### **4. UI/UX & Design Requirements**
+#### **A. Design Preferences**
+- **Style:** **Modern, dark-themed (with light mode toggle)**, immersive, and **book-like aesthetics**.
+- **Inspiration:** Mix of **Notion (clean editor)**, **Wattpad (social feed)**, and **Medium (typography)**.
+- **Color Palette:**
+  - Primary: `#2D3748` (dark slate)
+  - Secondary: `#4299E1` (blue accent)
+  - Mature Channel: `#8B1A1A` (deep red)
+  - Highlights: `#F6AD55` (amber for CTAs)
+- **Typography:**
+  - Headings: **Inter Bold**
+  - Body: **Lora (serif for readability)**
+  - Code/Mono: **Fira Code**
+
+#### **B. Key Pages & Wireframes**
+| Page               | Description                                                                                                                                                     | UI Elements                                                                                     |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| **Landing Page**   | Hero section with **trending books**, genre filters, and **CTA ("Start Writing")**.                                                                             | Animated book carousel, dark gradient background, minimalist nav.                            |
+| **Sign-Up/Login**  | Email, Google, or GitHub auth. **Age verification toggle** for mature content.                                                                                 | Illustrated onboarding, dark-themed forms.                                                    |
+| **Dashboard**      | Creator analytics, drafts, earnings, and **quick-publish button**.                                                                                             | Card-based layout, charts for stats.                                                          |
+| **Book Editor**    | **Drag-and-drop chapters**, multimedia embeds, and **AI-assisted writing tools** (grammar, tone suggestions).                                                  | Split-screen (preview + editor), toolbar for media.                                           |
+| **Feed**          | **Algorithm-curated** books with filters (genre, media type, trending).                                                                                         | Infinite scroll, hover previews, like/comment buttons.                                        |
+| **Book Viewer**   | **Immersive reading** with adjustable text size, dark mode, and **embedded media playback**.                                                                    | Full-screen mode, chapter navigation, tip button.                                             |
+| **Mature Channel**| **Age-gated** section with explicit content warning. Same feed layout but with **red accent**.                                                                 | Blurred thumbnails until age confirmation.                                                    |
+| **Monetization**  | Stripe-connected **pricing tiers**, subscription management, and **payout dashboard**.                                                                         | Clean tables for earnings, withdrawal buttons.                                                |
+| **Admin Panel**   | Moderation queue, **AI flagged content review**, user reports, and **ban tools**.                                                                               | Data grids, bulk actions, activity logs.                                                     |
+
+#### **C. Micro-Interactions**
+- **Hover Effects:** Book covers tilt slightly; buttons have a **subtle pulse**.
+- **Loading States:** Skeleton screens for feeds; **progress bars** for uploads.
+- **Notifications:** Toast alerts for new followers, comments, or earnings.
+
+---
+
+### **5. Development Priorities (MVP vs. Full)
+| Phase       | Features                                                                                     |
+|-------------|----------------------------------------------------------------------------------------------|
+| **MVP**     | Core editor, basic feed, Stripe payments, Supabase auth/storage, AI moderation (text-only).   |
+| **V1.5**    | Video/audio support, GitHub sync, advanced analytics, mobile optimization.                   |
+| **V2.0**    | Community challenges, collaborative editing, Cloudinary CDN, AI writing assistant.         |
+
+---
+
+### **6. Deployment & Scalability**
+- **Hosting:** Vercel (frontend) + Supabase (backend).
+- **CI/CD:** GitHub Actions for automated testing/deployment.
+- **Scaling:** Supabase’s Postgres DB auto-scales; media stored in **S3-compatible buckets**.
+
+---
+
+### **7. Lovable.dev-Specific Instructions**
+#### **A. Output Request**
+Generate:
+1. **Full-stack web app** (Next.js + Supabase + Stripe).
+2. **Mobile-responsive** (PWA-ready).
+3. **Admin panel** for moderation.
+4. **Documentation** for:
+   - API endpoints.
+   - GitHub collaboration setup.
+   - Stripe webhook handling.
+
+#### **B. Credit-Saving Optimizations**
+- **Reuse Components:** Standardize buttons, cards, and modals across pages.
+- **Prioritize MVP:** Focus on **core editor + feed + payments** first.
+- **Leverage Supabase:** Use built-in auth/storage to reduce custom backend work.
+- **AI Moderation:** Start with **text-only filtering** (expand to media later).
+
+#### **C. Avoid (To Save Credits)**
+- ❌ Custom video player (use **HTML5 default** or **Cloudinary’s embed**).
+- ❌ Advanced AI (e.g., auto-summarization) – keep moderation simple.
+- ❌ Native mobile apps (PWA is sufficient for MVP).
+
+---
+**[End of Prompt]**     
+
+use Nuxt.js for ts
