@@ -10,6 +10,7 @@ Preferred communication style: Simple, everyday language.
 Age consideration: User is under 18, prefers payment options that don't require ID verification (Cash App, debit cards).
 Focus: Prioritize reading/buying books over selling (selling requires adult verification for Stripe).
 Payment setup: User will ask family member to help set up Stripe keys for Cash App Pay and card payments.
+Deployment: App now supports external platforms (Railway, Render, Koyeb) with demo mode when Replit Auth unavailable.
 
 ## System Architecture
 

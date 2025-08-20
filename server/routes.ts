@@ -23,6 +23,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const userId = req.user.claims.sub;
       const user = await storage.getUser(userId);
+      
+      // For external deployments, create demo user if doesn't exist
+      if (!user && userId === "demo-user") {
+        const demoUser = await storage.upsertUser({
+          id: "demo-user",
+          email: "demo@example.com",
+          firstName: "Demo",
+          lastName: "User"
+        });
+        return res.json(demoUser);
+      }
+      
       res.json(user);
     } catch (error) {
       console.error("Error fetching user:", error);

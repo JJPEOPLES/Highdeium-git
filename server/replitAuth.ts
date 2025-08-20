@@ -8,8 +8,11 @@ import memoize from "memoizee";
 import connectPg from "connect-pg-simple";
 import { storage } from "./storage";
 
-if (!process.env.REPLIT_DOMAINS) {
-  throw new Error("Environment variable REPLIT_DOMAINS not provided");
+// Check if we're running on Replit or external platform
+const isReplitEnvironment = process.env.REPLIT_DOMAINS && process.env.REPL_ID;
+
+if (!isReplitEnvironment) {
+  console.log("Running on external platform - Replit Auth disabled");
 }
 
 const getOidcConfig = memoize(
@@ -72,6 +75,12 @@ export async function setupAuth(app: Express) {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  // Only set up Replit Auth if running on Replit
+  if (!isReplitEnvironment) {
+    console.log("Skipping Replit Auth setup for external deployment");
+    return;
+  }
+
   const config = await getOidcConfig();
 
   const verify: VerifyFunction = async (
@@ -128,6 +137,21 @@ export async function setupAuth(app: Express) {
 }
 
 export const isAuthenticated: RequestHandler = async (req, res, next) => {
+  // For external deployments without Replit Auth, allow all requests for now
+  if (!isReplitEnvironment) {
+    console.log("External deployment - skipping authentication");
+    // Create a mock user for development/demo purposes
+    req.user = {
+      claims: {
+        sub: "demo-user",
+        email: "demo@example.com",
+        first_name: "Demo",
+        last_name: "User"
+      }
+    };
+    return next();
+  }
+
   const user = req.user as any;
 
   if (!req.isAuthenticated() || !user.expires_at) {
