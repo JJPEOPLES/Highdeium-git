@@ -12,6 +12,7 @@ import Home from "@/pages/Home";
 import BookReader from "@/pages/BookReader";
 import Profile from "@/pages/Profile";
 import Checkout from "@/pages/Checkout";
+import PaymentInfo from "@/pages/PaymentInfo";
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -22,6 +23,7 @@ function Router() {
         <>
           <Route path="/" component={Landing} />
           <Route path="/books/:id" component={BookReader} />
+          <Route path="/payment-info" component={PaymentInfo} />
           <Route component={NotFound} />
         </>
       ) : (
@@ -34,6 +36,7 @@ function Router() {
           <Route path="/bookmarks" component={Profile} />
           <Route path="/authors/:id" component={Profile} />
           <Route path="/checkout/:bookId" component={Checkout} />
+          <Route path="/payment-info" component={PaymentInfo} />
           <Route component={NotFound} />
         </>
       )}

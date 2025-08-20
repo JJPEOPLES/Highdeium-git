@@ -10,6 +10,6 @@ export function useAuth() {
     user,
     isLoading,
     isAuthenticated: !!user,
-    isDemoMode: user?.id === "demo-user",
+    isDemoMode: user && (user as any).id === "demo-user",
   };
 }
