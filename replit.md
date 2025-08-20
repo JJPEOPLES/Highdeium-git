@@ -7,6 +7,8 @@ Highdeium is a next-generation book writing and publishing platform that allows 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Age consideration: User is under 18, prefers payment options that don't require ID verification (Cash App, debit cards).
+Focus: Prioritize reading/buying books over selling (selling requires adult verification for Stripe).
 
 ## System Architecture
 

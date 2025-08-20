@@ -375,11 +375,28 @@ export default function Checkout() {
           <Card>
             <CardHeader>
               <CardTitle>Payment Information</CardTitle>
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg mt-2">
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  💡 <strong>Easy Payment Options:</strong> You can pay with Cash App, debit cards, or credit cards. 
+                  No ID verification required for purchases.
+                </p>
+              </div>
             </CardHeader>
             <CardContent>
-              <Elements stripe={stripePromise} options={{ clientSecret }}>
-                <CheckoutForm book={book} />
-              </Elements>
+              {stripePromise ? (
+                <Elements stripe={stripePromise} options={{ clientSecret }}>
+                  <CheckoutForm book={book} />
+                </Elements>
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Payment processing is currently unavailable.
+                  </p>
+                  <p className="text-sm text-gray-500 dark:text-gray-500">
+                    The site owner needs to configure payment settings.
+                  </p>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
